@@ -134,19 +134,19 @@ export default function Interpretation({ astrolabe }: { astrolabe: any }) {
       
       <div className="tabs">
         <button 
-          className={`tab-btn ${activeTab === 'timeline' ? 'active' : ''}`}
+          className={`tab-btn tab-btn-timeline ${activeTab === 'timeline' ? 'active' : ''}`}
           onClick={() => setActiveTab('timeline')}
         >
           <Clock size={18} /> 時光軌跡 (大限流年)
         </button>
         <button 
-          className={`tab-btn ${activeTab === 'personality' ? 'active' : ''}`}
+          className={`tab-btn tab-btn-personality ${activeTab === 'personality' ? 'active' : ''}`}
           onClick={() => setActiveTab('personality')}
         >
           <User size={18} /> 先天人格特質
         </button>
         <button 
-          className={`tab-btn ${activeTab === 'palaces' ? 'active' : ''}`}
+          className={`tab-btn tab-btn-palaces ${activeTab === 'palaces' ? 'active' : ''}`}
           onClick={() => setActiveTab('palaces')}
         >
           <Grid3X3 size={18} /> 十二宮總覽

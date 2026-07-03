@@ -10,7 +10,7 @@ function generateReading(palace: any, isDecadal: boolean = false, contextOverrid
   let reading = '';
 
   if (isDecadal) {
-    reading += `在這十年的大限期間，您的「大限命宮」走到了本命盤的【${palace.name}】。\n這代表您這十年的總體運勢、環境變化與行事作風，不再侷限於先天的個性，而是會被以下星曜的能量所主導：\n\n`;
+    reading += `在這十年的大限階段（${palace.decadal.range[0]}~${palace.decadal.range[1]}歲），您的總體運勢、環境變化與行事作風，不再侷限於先天的個性，而是會被以下星曜的能量所強烈主導：\n\n`;
   } else {
     // 1. 宮位意義 (Only show for non-decadal)
     if (contextOverride) {
@@ -22,9 +22,9 @@ function generateReading(palace: any, isDecadal: boolean = false, contextOverrid
 
   // 2. 主星意象
   if (isEmpty) {
-    reading += `此宮位目前為「空宮」（無主星駐守）。這意味著您在這個領域的發展具有極大的可塑性與彈性，但也容易受到外界或環境的牽引。特質上會受到對面宮位（對宮）星曜的強烈影響。`;
+    reading += `此階段目前為「空宮」（無主星駐守）。這意味著您在這個領域的發展具有極大的可塑性與彈性，但也容易受到外界或環境的牽引。`;
   } else {
-    reading += `主導此宮位的核心星曜是【${majorNames}】。\n`;
+    reading += `主導核心能量的是【${majorNames}】。\n`;
     palace.majorStars.forEach((star: any) => {
       reading += `${STAR_MEANINGS[star.name] || ''} `;
       if (star.brightness === '庙' || star.brightness === '旺') {
@@ -63,8 +63,8 @@ function PalaceDetail({ palace, isDecadal = false, contextOverride = '' }: { pal
   return (
     <div className="interpretation-card">
       <div className="card-header">
-        <h3>{palace.name}</h3>
-        {isDecadal && <span className="card-desc">大限: {palace.decadal.range[0]}-{palace.decadal.range[1]}歲</span>}
+        <h3>{isDecadal ? `人生階段：${palace.decadal.range[0]}~${palace.decadal.range[1]}歲` : palace.name}</h3>
+        {isDecadal && <span className="card-desc">十年大限運勢</span>}
       </div>
       <div className="card-content">
         {readingText.split('\n').map((paragraph, idx) => (

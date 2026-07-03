@@ -72,6 +72,30 @@ function generateReading(palace: any, isDecadal: boolean = false, contextOverrid
   return reading;
 }
 
+function PalaceDetail({ palace, isDecadal = false, contextOverride = '' }: { palace: any, isDecadal?: boolean, contextOverride?: string }) {
+  const readingText = generateReading(palace, isDecadal, contextOverride);
+
+  return (
+    <div className="interpretation-card" style={isDecadal ? { border: 'none', boxShadow: 'none', background: 'transparent', padding: 0 } : {}}>
+      {isDecadal ? (
+        <div style={{ marginBottom: '1rem' }}>
+          <div style={{ fontSize: '1.1rem', color: '#a78bfa', fontWeight: 'bold' }}>人生階段：{palace.decadal.range[0]}~{palace.decadal.range[1]}歲</div>
+          <div style={{ fontSize: '1rem', color: '#94a3b8', marginBottom: '1rem' }}>十年大限運勢</div>
+        </div>
+      ) : (
+        <div className="card-header">
+          <h3>{palace.name}</h3>
+        </div>
+      )}
+      <div className="card-content">
+        {readingText.split('\n').map((paragraph, idx) => (
+          paragraph.trim() ? <p key={idx} style={{marginBottom: '0.8rem'}}>{paragraph}</p> : null
+        ))}
+      </div>
+    </div>
+  );
+}
+
 export default function Interpretation({ astrolabe }: { astrolabe: any }) {
   const [activeTab, setActiveTab] = useState<'timeline' | 'personality' | 'palaces'>('timeline');
 
@@ -127,33 +151,35 @@ export default function Interpretation({ astrolabe }: { astrolabe: any }) {
             <h3 className="section-title">
               <Sparkles className="inline-icon" /> 時光軌跡 (大限流年運勢)
             </h3>
-            <p style={{marginBottom: '1rem', color: '#94a3b8'}}>您目前虛歲 <strong>{currentAge}</strong> 歲。以下為您人生三個重要大限十年期的能量流轉：</p>
+            <p style={{marginBottom: '1rem', color: '#94a3b8'}}>您目前虛歲 <strong>{currentAge}</strong> 歲。每十年為一個「大限」，這決定了您這十年間的環境變化與心境主軸。</p>
             
-            <div className="timeline-grid" style={{display: 'flex', flexDirection: 'column', gap: '1rem'}}>
-              <div className="interpretation-card present-card" style={{borderColor: '#38bdf8', boxShadow: '0 0 15px rgba(56, 189, 248, 0.15)'}}>
-                <div className="card-header"><h3 style={{color: '#38bdf8'}}>現在 (當前大限 {presentPalace.decadal.range[0]}~{presentPalace.decadal.range[1]}歲)</h3></div>
-                <div className="card-content">
-                  {generateReading(presentPalace, true).split('\n').map((line, i) => <p key={i}>{line}</p>)}
-                </div>
+            <div className="timeline-grid" style={{display: 'flex', flexDirection: 'column', gap: '2rem'}}>
+              
+              <div className="timeline-card present-card" style={{ padding: '1.5rem', background: 'rgba(56, 189, 248, 0.05)', borderLeft: '4px solid #38bdf8', borderRadius: '0.5rem' }}>
+                <h4 style={{ color: '#38bdf8', fontSize: '1.3rem', marginBottom: '1rem', display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+                  <Sparkles size={20} /> 現在 (當前大限)
+                </h4>
+                <PalaceDetail palace={presentPalace} isDecadal={true} />
               </div>
               
               {futurePalace && (
-                <div className="interpretation-card future-card" style={{opacity: 0.9}}>
-                  <div className="card-header"><h3 style={{color: '#a78bfa'}}>未來 (下個大限 {futurePalace.decadal.range[0]}~{futurePalace.decadal.range[1]}歲)</h3></div>
-                  <div className="card-content">
-                    {generateReading(futurePalace, true).split('\n').map((line, i) => <p key={i}>{line}</p>)}
-                  </div>
+                <div className="timeline-card future-card" style={{ padding: '1.5rem', background: 'rgba(167, 139, 250, 0.05)', borderLeft: '4px solid #a78bfa', borderRadius: '0.5rem' }}>
+                  <h4 style={{ color: '#a78bfa', fontSize: '1.3rem', marginBottom: '1rem' }}>
+                    👉 未來 (下一階段)
+                  </h4>
+                  <PalaceDetail palace={futurePalace} isDecadal={true} />
                 </div>
               )}
               
               {pastPalace && (
-                <div className="interpretation-card past-card" style={{opacity: 0.7}}>
-                  <div className="card-header"><h3 style={{color: '#94a3b8'}}>過去 (前個大限 {pastPalace.decadal.range[0]}~{pastPalace.decadal.range[1]}歲)</h3></div>
-                  <div className="card-content">
-                    {generateReading(pastPalace, true).split('\n').map((line, i) => <p key={i}>{line}</p>)}
-                  </div>
+                <div className="timeline-card past-card" style={{ padding: '1.5rem', background: 'rgba(148, 163, 184, 0.05)', borderLeft: '4px solid #94a3b8', borderRadius: '0.5rem' }}>
+                  <h4 style={{ color: '#94a3b8', fontSize: '1.3rem', marginBottom: '1rem' }}>
+                    ⏳ 過去 (前一階段)
+                  </h4>
+                  <PalaceDetail palace={pastPalace} isDecadal={true} />
                 </div>
               )}
+              
             </div>
             
             <div className="disclaimer-text mt-4">
@@ -165,30 +191,9 @@ export default function Interpretation({ astrolabe }: { astrolabe: any }) {
         {activeTab === 'personality' && (
           <div className="interpretation-section fade-in">
             <h3 className="section-title">先天命盤核心 (命、官、財)</h3>
-            
-            <div className="interpretation-card">
-              <div className="card-content">
-                {generateReading(lifePalace, false, '核心人格與天賦').split('\n').map((line, i) => (
-                  <p key={i}>{line}</p>
-                ))}
-              </div>
-            </div>
-
-            <div className="interpretation-card">
-              <div className="card-content">
-                {generateReading(careerPalace, false, '事業發展與潛能').split('\n').map((line, i) => (
-                  <p key={i}>{line}</p>
-                ))}
-              </div>
-            </div>
-
-            <div className="interpretation-card">
-              <div className="card-content">
-                {generateReading(wealthPalace, false, '財富觀念與理財').split('\n').map((line, i) => (
-                  <p key={i}>{line}</p>
-                ))}
-              </div>
-            </div>
+            <PalaceDetail palace={lifePalace} contextOverride="核心人格與天賦" />
+            <PalaceDetail palace={careerPalace} contextOverride="事業發展與潛能" />
+            <PalaceDetail palace={wealthPalace} contextOverride="財富觀念與理財" />
           </div>
         )}
 
@@ -197,12 +202,8 @@ export default function Interpretation({ astrolabe }: { astrolabe: any }) {
             <h3 className="section-title">全息星盤解碼</h3>
             <div className="palaces-grid-view">
               {astrolabe.palaces.map((palace: any) => (
-                <div key={palace.name} className="interpretation-card mini">
-                  <div className="card-content">
-                    {generateReading(palace).split('\n').map((line, i) => (
-                      <p key={i}>{line}</p>
-                    ))}
-                  </div>
+                <div key={palace.name} className="mini">
+                  <PalaceDetail palace={palace} />
                 </div>
               ))}
             </div>

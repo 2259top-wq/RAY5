@@ -119,8 +119,9 @@ export default function Interpretation({ astrolabe }: { astrolabe: any }) {
   ) : null;
 
   const lifePalace = astrolabe.palaces.find((p: any) => p.name === '命宮');
-  const careerPalace = astrolabe.palaces.find((p: any) => p.name === '官祿');
-  const wealthPalace = astrolabe.palaces.find((p: any) => p.name === '財帛');
+  const elementText = ELEMENT_MEANINGS[astrolabe.fiveElementsClass] || `【${astrolabe.fiveElementsClass}】您的五行屬性為此類型。`;
+  const bodyPalace = astrolabe.palaces.find((p: any) => p.isBodyPalace) || astrolabe.palaces.find((p: any) => p.name === '遷移');
+  const travelPalace = astrolabe.palaces.find((p: any) => p.name === '遷移');
 
   return (
     <div className="interpretation-container">
@@ -189,22 +190,41 @@ export default function Interpretation({ astrolabe }: { astrolabe: any }) {
         )}
 
         {activeTab === 'personality' && (
-          <div className="interpretation-section fade-in">
-            <h3 className="section-title">先天命盤核心 (命、官、財)</h3>
-            <PalaceDetail palace={lifePalace} contextOverride="核心人格與天賦" />
-            <PalaceDetail palace={careerPalace} contextOverride="事業發展與潛能" />
-            <PalaceDetail palace={wealthPalace} contextOverride="財富觀念與理財" />
+          <div className="tab-section fade-in">
+            <img src="/destiny.png" alt="Destiny Banner" className="section-banner" />
+            <h3 className="section-title">立體先天人格特質解析</h3>
+            <p className="section-intro" style={{marginBottom: '1.5rem', color: '#94a3b8'}}>不只是命宮，我們透過紫微斗數中的「五行局」、「身宮」與「遷移宮」三維度交叉比對，為您描繪最真實的內在外在人格輪廓：</p>
+            
+            <div className="personality-profile">
+              <div className="interpretation-card" style={{borderColor: '#fbbf24', boxShadow: '0 0 20px rgba(251, 191, 36, 0.15)', marginBottom: '2rem'}}>
+                <div className="card-header">
+                  <h3 style={{color: '#fbbf24'}}>🔥 五行局：{astrolabe.fiveElementsClass}</h3>
+                </div>
+                <div className="card-content">
+                  <p>{elementText}</p>
+                </div>
+              </div>
+              
+              <h4 style={{marginTop: '2rem', marginBottom: '1rem', color: '#a78bfa', fontSize: '1.2rem'}}>1. 靈魂實質 (內在核心)</h4>
+              {lifePalace && <PalaceDetail palace={lifePalace} contextOverride="先天命格、天賦與核心價值觀" />}
+              
+              <h4 style={{marginTop: '2rem', marginBottom: '1rem', color: '#a78bfa', fontSize: '1.2rem'}}>2. 後天造化與隱藏性格 (三十五歲後)</h4>
+              {bodyPalace && <PalaceDetail palace={bodyPalace} contextOverride={`【身宮落在${bodyPalace.name}】。這代表您中晚年後的人生重心、行為模式與隱藏性格。`} />}
+              
+              <h4 style={{marginTop: '2rem', marginBottom: '1rem', color: '#a78bfa', fontSize: '1.2rem'}}>3. 社會面具與第一印象 (外在展現)</h4>
+              {travelPalace && <PalaceDetail palace={travelPalace} contextOverride="這代表您在他人眼中的形象、給人的第一印象，以及您在公眾場合的行為表現。" />}
+            </div>
           </div>
         )}
 
         {activeTab === 'palaces' && (
-          <div className="interpretation-section fade-in">
-            <h3 className="section-title">全息星盤解碼</h3>
-            <div className="palaces-grid-view">
+          <div className="tab-section fade-in">
+            <img src="/palaces.png" alt="Palaces Banner" className="section-banner" />
+            <h3 className="section-title">12宮位深度解析</h3>
+            <p className="section-intro" style={{marginBottom: '1.5rem', color: '#94a3b8'}}>以下為您星盤中全部 12 個宮位的詳細白話解釋與建議，提供您全方位的閱讀參考：</p>
+            <div className="interpretation-grid">
               {astrolabe.palaces.map((palace: any) => (
-                <div key={palace.name} className="mini">
-                  <PalaceDetail palace={palace} />
-                </div>
+                <PalaceDetail key={palace.name} palace={palace} />
               ))}
             </div>
           </div>

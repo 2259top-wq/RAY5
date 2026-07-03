@@ -69,6 +69,19 @@ function generateReading(palace: any, isDecadal: boolean = false, contextOverrid
     });
   }
 
+  // 4. 總結與建議
+  reading += `\n💡 【總結與建議】\n`;
+  if (isEmpty) {
+    reading += `由於此領域缺乏主星坐守，發展變數較大、容易隨波逐流。建議您多藉助外部的資源或他人的智慧，保持靈活應變的彈性，無需過度執著。`;
+  } else if (badStars.length > goodStars.length) {
+    reading += `綜合來看，此宮位目前承受的壓力與干擾因素較多。行事宜保守謹慎，遇事多聽取客觀意見，以靜制動、穩紮穩打為佳。`;
+  } else if (goodStars.length > badStars.length) {
+    reading += `綜合來看，此宮位匯聚了相當不錯的貴人與助力。是個非常值得把握與積極發揮的好時機，請勇敢展現自己的長處！`;
+  } else {
+    reading += `綜合來看，此宮位展現出好壞互見、吉凶並存的能量。請善用主星賦予您的正向天賦，適時排解壓力，保持心態的平穩與覺察。`;
+  }
+  reading += `\n`;
+
   return reading;
 }
 

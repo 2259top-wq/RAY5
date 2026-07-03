@@ -262,16 +262,6 @@ body {
   border-top: 1px solid var(--panel-border);
 }
 
-@media (max-width: 768px) {
-  .astrolabe {
-    display: flex;
-    flex-direction: column;
-  }
-  .palace-center {
-    display: none;
-  }
-}
-
 /* Interpretation Panel */
 .results-container {
   display: flex;

@@ -4,8 +4,9 @@ import { astro } from 'iztro';
 import AstrolabeComponent from './Astrolabe';
 import Interpretation from './Interpretation';
 import Particles from './Particles';
+import Tutorial from './Tutorial';
 import { ambientSynth } from './utils/audio';
-import { Volume2, VolumeX } from 'lucide-react';
+import { Volume2, VolumeX, Sparkles } from 'lucide-react';
 import './index.css';
 
 const timeOptions = [
@@ -27,9 +28,10 @@ const timeOptions = [
 function App() {
   const [date, setDate] = useState('2000-01-01');
   const [timeIndex, setTimeIndex] = useState(6); // Default 午時
-  const [gender, setGender] = useState<'男' | '女'>('男');
+  const [gender, setGender] = useState<'M' | 'F'>('M');
   const [astrolabe, setAstrolabe] = useState<any>(null);
   const [isPlaying, setIsPlaying] = useState(false);
+  const [showTutorial, setShowTutorial] = useState(false);
 
   const toggleMusic = () => {
     const state = ambientSynth.toggle();
@@ -39,93 +41,96 @@ function App() {
   const handleSubmit = (e: FormEvent) => {
     e.preventDefault();
     try {
-      const result = astro.bySolar(date, timeIndex, gender, true, 'zh-TW');
+      const genderStr = gender === 'M' ? '男' : '女';
+      const result = astro.bySolar(date, timeIndex, genderStr, true, 'zh-TW');
       setAstrolabe(result);
     } catch (err) {
       console.error(err);
-      alert('排盤失敗，請檢查輸入的日期與時間！');
+      alert('排盤失敗，請檢查輸入的日期與時間。');
     }
   };
 
   return (
-    <>
+    <div className="app-container">
       <Particles />
-      <button 
-        className={`audio-btn ${isPlaying ? 'playing' : ''}`} 
-        onClick={toggleMusic}
-        title="播放/暫停環境音"
-      >
-        {isPlaying ? <Volume2 size={24} /> : <VolumeX size={24} />}
-      </button>
+      
+      {showTutorial && <Tutorial onClose={() => setShowTutorial(false)} />}
+      
+      <header className="header">
+        <h1 className="title">紫微星鑰</h1>
+        <p className="subtitle">探索您的生命導航藍圖</p>
+        
+        <button 
+          className="tutorial-open-btn"
+          onClick={() => setShowTutorial(true)}
+        >
+          <Sparkles size={16} /> 新手自動導覽
+        </button>
+      </header>
 
-      <div className="app-container">
-        <header className="header">
-          <h1>紫微斗數論命</h1>
-          <p>基於《紫微斗數全集》與《紫微斗數全書》之古法排盤系統</p>
-        </header>
+      <div className="controls">
+        <button 
+          className={`audio-btn ${isPlaying ? 'playing' : ''}`}
+          onClick={toggleMusic}
+          title="播放/暫停環境音"
+        >
+          {isPlaying ? <Volume2 size={24} /> : <VolumeX size={24} />}
+        </button>
+      </div>
 
-        <main>
-          <section className="form-panel">
-            <form onSubmit={handleSubmit}>
-            <div className="form-grid">
-              <div className="input-group">
-                <label>國曆出生日期</label>
-                <input 
-                  type="date" 
-                  value={date} 
-                  onChange={(e) => setDate(e.target.value)}
-                  required 
-                />
-              </div>
-              
-              <div className="input-group">
-                <label>出生時辰</label>
-                <select 
-                  value={timeIndex} 
-                  onChange={(e) => setTimeIndex(Number(e.target.value))}
-                >
-                  {timeOptions.map((opt) => (
-                    <option key={opt.value} value={opt.value}>
-                      {opt.label}
-                    </option>
-                  ))}
-                </select>
-              </div>
+      <form onSubmit={handleSubmit} className="input-form glass-panel">
+        <div className="input-group">
+          <label>西元生日</label>
+          <input 
+            type="date" 
+            value={date}
+            onChange={(e) => setDate(e.target.value)}
+            required
+          />
+        </div>
+        
+        <div className="input-group">
+          <label>出生時辰</label>
+          <select 
+            value={timeIndex}
+            onChange={(e) => setTimeIndex(Number(e.target.value))}
+          >
+            {timeOptions.map(opt => (
+              <option key={opt.value} value={opt.value}>
+                {opt.label}
+              </option>
+            ))}
+          </select>
+        </div>
 
-              <div className="input-group">
-                <label>性別</label>
-                <select 
-                  value={gender} 
-                  onChange={(e) => setGender(e.target.value as '男' | '女')}
-                >
-                  <option value="男">男 (乾造)</option>
-                  <option value="女">女 (坤造)</option>
-                </select>
-              </div>
-            </div>
+        <div className="input-group">
+          <label>生理性別</label>
+          <select 
+            value={gender}
+            onChange={(e) => setGender(e.target.value as 'M' | 'F')}
+          >
+            <option value="M">男 (乾造)</option>
+            <option value="F">女 (坤造)</option>
+          </select>
+        </div>
 
-            <button type="submit" className="btn-submit">
-              開始排盤
-            </button>
-          </form>
-        </section>
+        <button type="submit" className="btn-submit">
+          開始排盤
+        </button>
+      </form>
 
-        {astrolabe && (
-          <div className="results-container">
-            <div className="astrolabe-scroll">
-              <AstrolabeComponent astrolabe={astrolabe} />
-            </div>
-            <Interpretation astrolabe={astrolabe} />
-          </div>
-        )}
-      </main>
+      {astrolabe && (
+        <div className="results-container glass-panel">
+          <AstrolabeComponent astrolabe={astrolabe} />
+          <Interpretation astrolabe={astrolabe} />
+        </div>
+      )}
 
       <footer className="disclaimer">
         <p>本服務基於 MIT 開源套件構建，嚴格遵循公有領域之古籍演算法。</p>
-        <p>免責聲明：命理結果僅供娛樂與文化研究參考，請勿過度迷信或作為重大決策依據。</p>
+        <p>分析內容為原創之現代心理學詮釋，不代表任何宿命論斷。</p>
       </footer>
     </div>
-    </>
   );
 }
 

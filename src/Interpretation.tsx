@@ -39,23 +39,32 @@ function generateReading(palace: any, isDecadal: boolean = false, contextOverrid
   }
 
   // 3. 輔星與雜曜意象
-  const allMinorStars = palace.minorStars || [];
+  const goodStars = (palace.minorStars || []).filter((s: any) => ['文昌','文曲','左輔','右弼','天魁','天鉞','祿存','天馬'].includes(s.name));
+  const badStars = (palace.minorStars || []).filter((s: any) => ['擎羊','陀羅','火星','鈴星','地空','地劫'].includes(s.name));
   const allAdjectiveStars = palace.adjectiveStars || [];
   
-  if (allMinorStars.length > 0 || allAdjectiveStars.length > 0) {
-    reading += `\n【輔星與神煞點綴】\n`;
+  if (goodStars.length > 0 || badStars.length > 0 || allAdjectiveStars.length > 0) {
+    reading += `\n【輔助與干擾因素】\n`;
     
-    allMinorStars.forEach((star: any) => {
+    goodStars.forEach((star: any) => {
       if (STAR_MEANINGS[star.name]) {
-        reading += `✦ ${STAR_MEANINGS[star.name]}\n`;
+        reading += `✨ ${STAR_MEANINGS[star.name]}\n`;
       } else {
-        reading += `✦ 【${star.name}】帶來額外的干擾或助力。\n`;
+        reading += `✨ 【${star.name}】帶來額外的助力。\n`;
+      }
+    });
+
+    badStars.forEach((star: any) => {
+      if (STAR_MEANINGS[star.name]) {
+        reading += `⚠️ ${STAR_MEANINGS[star.name]}\n`;
+      } else {
+        reading += `⚠️ 【${star.name}】帶來額外的干擾。\n`;
       }
     });
     
     allAdjectiveStars.forEach((star: any) => {
       if (ADJECTIVE_STAR_MEANINGS[star.name]) {
-        reading += `✧ 【${star.name}】${ADJECTIVE_STAR_MEANINGS[star.name]}\n`;
+        reading += `✧ ${ADJECTIVE_STAR_MEANINGS[star.name]}\n`;
       }
     });
   }

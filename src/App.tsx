@@ -39,7 +39,7 @@ function App() {
   const handleSubmit = (e: FormEvent) => {
     e.preventDefault();
     try {
-      const result = astro.bySolar(date, timeIndex, gender, true);
+      const result = astro.bySolar(date, timeIndex, gender, true, 'zh-TW');
       setAstrolabe(result);
     } catch (err) {
       console.error(err);

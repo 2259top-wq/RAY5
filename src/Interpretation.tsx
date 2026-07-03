@@ -41,8 +41,8 @@ function generateReading(palace: any, isDecadal: boolean = false, contextOverrid
   }
 
   // 3. 吉煞星意象
-  const goodStars = palace.minorStars.filter((s: any) => ['文昌','文曲','左辅','右弼','天魁','天钺','禄存','天马'].includes(s.name));
-  const badStars = palace.minorStars.filter((s: any) => ['擎羊','陀罗','火星','铃星','地空','地劫'].includes(s.name));
+  const goodStars = palace.minorStars.filter((s: any) => ['文昌','文曲','左輔','右弼','天魁','天鉞','祿存','天馬'].includes(s.name));
+  const badStars = palace.minorStars.filter((s: any) => ['擎羊','陀羅','火星','鈴星','地空','地劫'].includes(s.name));
 
   if (goodStars.length > 0 || badStars.length > 0) {
     reading += `\n【輔助與干擾因素】\n`;
@@ -76,9 +76,9 @@ function PalaceDetail({ palace, isDecadal = false, contextOverride = '' }: { pal
 }
 
 function PersonalityProfile({ astrolabe }: { astrolabe: any }) {
-  const destinyPalace = astrolabe.palaces.find((p: any) => p.name === '命宫');
+  const destinyPalace = astrolabe.palaces.find((p: any) => p.name === '命宮');
   const bodyPalace = astrolabe.palaces.find((p: any) => p.isBodyPalace);
-  const travelPalace = astrolabe.palaces.find((p: any) => p.name === '迁移');
+  const travelPalace = astrolabe.palaces.find((p: any) => p.name === '遷移');
   
   const elementText = ELEMENT_MEANINGS[astrolabe.fiveElementsClass] || `【${astrolabe.fiveElementsClass}】您的五行屬性為此局。`;
 

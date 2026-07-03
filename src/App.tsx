@@ -90,40 +90,42 @@ function App() {
         </button>
       </div>
 
-      <form onSubmit={handleSubmit} className="input-form glass-panel">
-        <div className="input-group">
-          <label>西元生日</label>
-          <input 
-            type="date" 
-            value={date}
-            onChange={(e) => setDate(e.target.value)}
-            required
-          />
-        </div>
-        
-        <div className="input-group">
-          <label>出生時辰</label>
-          <select 
-            value={timeIndex}
-            onChange={(e) => setTimeIndex(Number(e.target.value))}
-          >
-            {timeOptions.map(opt => (
-              <option key={opt.value} value={opt.value}>
-                {opt.label}
-              </option>
-            ))}
-          </select>
-        </div>
+      <form onSubmit={handleSubmit} className="form-panel">
+        <div className="form-grid">
+          <div className="input-group">
+            <label>西元生日</label>
+            <input 
+              type="date" 
+              value={date}
+              onChange={(e) => setDate(e.target.value)}
+              required
+            />
+          </div>
+          
+          <div className="input-group">
+            <label>出生時辰</label>
+            <select 
+              value={timeIndex}
+              onChange={(e) => setTimeIndex(Number(e.target.value))}
+            >
+              {timeOptions.map(opt => (
+                <option key={opt.value} value={opt.value}>
+                  {opt.label}
+                </option>
+              ))}
+            </select>
+          </div>
 
-        <div className="input-group">
-          <label>生理性別</label>
-          <select 
-            value={gender}
-            onChange={(e) => setGender(e.target.value as 'M' | 'F')}
-          >
-            <option value="M">男 (乾造)</option>
-            <option value="F">女 (坤造)</option>
-          </select>
+          <div className="input-group">
+            <label>生理性別</label>
+            <select 
+              value={gender}
+              onChange={(e) => setGender(e.target.value as 'M' | 'F')}
+            >
+              <option value="M">男 (乾造)</option>
+              <option value="F">女 (坤造)</option>
+            </select>
+          </div>
         </div>
 
         <button type="submit" className="btn-submit">

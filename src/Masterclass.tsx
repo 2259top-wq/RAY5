@@ -1,4 +1,4 @@
-import { useState, useRef } from 'react';
+import { useState, useRef, useEffect } from 'react';
 import { X, BookOpen, Clock, Atom, Compass, Activity } from 'lucide-react';
 import './Masterclass.css';
 
@@ -130,6 +130,21 @@ export default function Masterclass({ onClose }: MasterclassProps) {
       contentRef.current.scrollTop = 0;
     }
   };
+
+  // Handle hardware back button
+  useEffect(() => {
+    window.history.pushState({ modalOpen: true }, '');
+    const handlePopState = () => {
+      onClose();
+    };
+    window.addEventListener('popstate', handlePopState);
+    return () => {
+      window.removeEventListener('popstate', handlePopState);
+      if (window.history.state?.modalOpen) {
+        window.history.back();
+      }
+    };
+  }, [onClose]);
 
   return (
     <div className="masterclass-overlay">

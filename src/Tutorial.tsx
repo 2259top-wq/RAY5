@@ -65,6 +65,21 @@ export default function Tutorial({ onClose }: TutorialProps) {
     };
   }, [isPlaying, currentSlide]);
 
+  // Handle hardware back button
+  useEffect(() => {
+    window.history.pushState({ modalOpen: true }, '');
+    const handlePopState = () => {
+      onClose();
+    };
+    window.addEventListener('popstate', handlePopState);
+    return () => {
+      window.removeEventListener('popstate', handlePopState);
+      if (window.history.state?.modalOpen) {
+        window.history.back();
+      }
+    };
+  }, [onClose]);
+
   const goToSlide = (index: number) => {
     setCurrentSlide(index);
     setProgress(0);

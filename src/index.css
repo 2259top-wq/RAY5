@@ -128,12 +128,16 @@ body {
 }
 
 .btn-submit:active {
-  transform: translateY(0);
+.results-container {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  width: 100%;
 }
 
-.results-container {
-  overflow-x: auto;
+.astrolabe-scroll {
   width: 100%;
+  overflow-x: auto;
   padding-bottom: 1rem;
 }
 
@@ -148,7 +152,7 @@ body {
   border-radius: 1rem;
   border: 1px solid var(--panel-border);
   min-width: 850px; /* Forces large chart on mobile */
-  margin: 0 auto;
+  /* margin: 0 auto; is intentionally omitted so it doesn't cut off left side on mobile */
 }
 
 .palace {

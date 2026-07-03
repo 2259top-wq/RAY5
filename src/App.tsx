@@ -112,7 +112,9 @@ function App() {
 
         {astrolabe && (
           <div className="results-container">
-            <AstrolabeComponent astrolabe={astrolabe} />
+            <div className="astrolabe-scroll">
+              <AstrolabeComponent astrolabe={astrolabe} />
+            </div>
             <Interpretation astrolabe={astrolabe} />
           </div>
         )}

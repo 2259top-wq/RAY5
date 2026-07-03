@@ -5,8 +5,9 @@ import AstrolabeComponent from './Astrolabe';
 import Interpretation from './Interpretation';
 import Particles from './Particles';
 import Tutorial from './Tutorial';
+import Masterclass from './Masterclass';
 import { ambientSynth } from './utils/audio';
-import { Volume2, VolumeX, Sparkles } from 'lucide-react';
+import { Volume2, VolumeX, Sparkles, BookOpen } from 'lucide-react';
 import './index.css';
 
 const timeOptions = [
@@ -32,6 +33,7 @@ function App() {
   const [astrolabe, setAstrolabe] = useState<any>(null);
   const [isPlaying, setIsPlaying] = useState(false);
   const [showTutorial, setShowTutorial] = useState(false);
+  const [showMasterclass, setShowMasterclass] = useState(false);
 
   const toggleMusic = () => {
     const state = ambientSynth.toggle();
@@ -55,17 +57,27 @@ function App() {
       <Particles />
       
       {showTutorial && <Tutorial onClose={() => setShowTutorial(false)} />}
+      {showMasterclass && <Masterclass onClose={() => setShowMasterclass(false)} />}
       
       <header className="header">
         <h1 className="title">紫微星鑰</h1>
         <p className="subtitle">探索您的生命導航藍圖</p>
         
-        <button 
-          className="tutorial-open-btn"
-          onClick={() => setShowTutorial(true)}
-        >
-          <Sparkles size={16} /> 新手自動導覽
-        </button>
+        <div className="header-actions">
+          <button 
+            className="tutorial-open-btn"
+            onClick={() => setShowTutorial(true)}
+          >
+            <Sparkles size={16} /> 新手自動導覽
+          </button>
+          
+          <button 
+            className="masterclass-open-btn"
+            onClick={() => setShowMasterclass(true)}
+          >
+            <BookOpen size={16} /> 論文級學理指引
+          </button>
+        </div>
       </header>
 
       <div className="controls">

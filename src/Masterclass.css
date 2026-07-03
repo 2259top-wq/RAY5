@@ -1,0 +1,276 @@
+.masterclass-overlay {
+  position: fixed;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: rgba(5, 5, 16, 0.95);
+  backdrop-filter: blur(20px);
+  z-index: 2000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem;
+  animation: fadeIn 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.masterclass-modal {
+  width: 100%;
+  max-width: 1100px;
+  height: 85vh;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  overflow: hidden;
+}
+
+.masterclass-close {
+  position: absolute;
+  top: 1rem;
+  right: 1.5rem;
+  z-index: 10;
+  background: transparent;
+  border: none;
+  color: #94a3b8;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.masterclass-close:hover {
+  color: #ef4444;
+  transform: rotate(90deg);
+}
+
+.masterclass-layout {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+@media (min-width: 768px) {
+  .masterclass-layout {
+    flex-direction: row;
+  }
+}
+
+/* Sidebar */
+.masterclass-sidebar {
+  width: 100%;
+  background: rgba(10, 15, 25, 0.6);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  display: flex;
+  flex-direction: column;
+}
+
+@media (min-width: 768px) {
+  .masterclass-sidebar {
+    width: 320px;
+    border-bottom: none;
+    border-right: 1px solid rgba(255, 255, 255, 0.1);
+  }
+}
+
+.masterclass-header {
+  padding: 2rem 1.5rem;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.5rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.masterclass-logo-icon {
+  color: #fbbf24;
+  margin-bottom: 0.5rem;
+}
+
+.masterclass-header h2 {
+  color: #f8fafc;
+  font-size: 1.5rem;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  margin: 0;
+}
+
+.masterclass-badge {
+  background: rgba(251, 191, 36, 0.15);
+  color: #fbbf24;
+  font-size: 0.75rem;
+  padding: 0.2rem 0.6rem;
+  border-radius: 1rem;
+  border: 1px solid rgba(251, 191, 36, 0.3);
+  letter-spacing: 0.1em;
+}
+
+.masterclass-nav {
+  padding: 1.5rem 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  overflow-y: auto;
+  flex: 1;
+}
+
+.masterclass-nav-item {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  width: 100%;
+  background: transparent;
+  border: 1px solid transparent;
+  color: #94a3b8;
+  padding: 1rem;
+  border-radius: 0.8rem;
+  cursor: pointer;
+  text-align: left;
+  transition: all 0.3s ease;
+  font-size: 0.95rem;
+  line-height: 1.4;
+}
+
+.masterclass-nav-item:hover {
+  background: rgba(255, 255, 255, 0.05);
+  color: #e2e8f0;
+}
+
+.masterclass-nav-item.active {
+  background: linear-gradient(90deg, rgba(139, 92, 246, 0.2), transparent);
+  border-left: 3px solid #8b5cf6;
+  color: #f8fafc;
+  font-weight: 600;
+}
+
+.nav-icon {
+  color: #8b5cf6;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Content Area */
+.masterclass-content-area {
+  flex: 1;
+  padding: 2rem 1.5rem;
+  overflow-y: auto;
+  scroll-behavior: smooth;
+}
+
+@media (min-width: 768px) {
+  .masterclass-content-area {
+    padding: 3rem 4rem;
+  }
+}
+
+/* Typography for Academic Reader */
+.masterclass-article {
+  max-width: 750px;
+  margin: 0 auto;
+  color: #cbd5e1;
+}
+
+.masterclass-article h1 {
+  font-size: 2.2rem;
+  color: #f8fafc;
+  margin-bottom: 1.5rem;
+  line-height: 1.3;
+  font-weight: 800;
+  text-shadow: 0 0 20px rgba(139, 92, 246, 0.3);
+}
+
+.masterclass-lead {
+  font-size: 1.25rem;
+  color: #a78bfa;
+  font-weight: 500;
+  line-height: 1.6;
+  margin-bottom: 2.5rem;
+  padding-bottom: 2rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.masterclass-article h2 {
+  font-size: 1.5rem;
+  color: #e2e8f0;
+  margin-top: 3rem;
+  margin-bottom: 1.5rem;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.masterclass-article h2::before {
+  content: "";
+  display: block;
+  width: 4px;
+  height: 1.2em;
+  background: #38bdf8;
+  border-radius: 2px;
+}
+
+.masterclass-article p {
+  font-size: 1.05rem;
+  line-height: 2;
+  margin-bottom: 1.5rem;
+  text-align: justify;
+  letter-spacing: 0.02em;
+}
+
+.masterclass-article ul {
+  margin-bottom: 2rem;
+  padding-left: 1.5rem;
+}
+
+.masterclass-article li {
+  font-size: 1.05rem;
+  line-height: 2;
+  margin-bottom: 1rem;
+  color: #cbd5e1;
+}
+
+.masterclass-article strong {
+  color: #f8fafc;
+  font-weight: 600;
+  background: rgba(139, 92, 246, 0.15);
+  padding: 0 0.3rem;
+  border-radius: 0.2rem;
+}
+
+.masterclass-quote {
+  margin: 3rem 0;
+  padding: 2rem;
+  background: linear-gradient(135deg, rgba(251, 191, 36, 0.05), rgba(139, 92, 246, 0.05));
+  border-left: 4px solid #fbbf24;
+  border-radius: 0 1rem 1rem 0;
+  font-size: 1.2rem;
+  color: #fbbf24;
+  font-weight: 500;
+  line-height: 1.8;
+  font-style: italic;
+  position: relative;
+}
+
+.masterclass-quote::before {
+  content: '"';
+  position: absolute;
+  top: -1rem;
+  left: 1rem;
+  font-size: 4rem;
+  color: rgba(251, 191, 36, 0.2);
+  font-family: serif;
+}
+
+/* Custom Scrollbar for Content */
+.masterclass-content-area::-webkit-scrollbar {
+  width: 8px;
+}
+
+.masterclass-content-area::-webkit-scrollbar-track {
+  background: rgba(0, 0, 0, 0.2);
+  border-radius: 4px;
+}
+
+.masterclass-content-area::-webkit-scrollbar-thumb {
+  background: rgba(139, 92, 246, 0.5);
+  border-radius: 4px;
+}
+
+.masterclass-content-area::-webkit-scrollbar-thumb:hover {
+  background: rgba(139, 92, 246, 0.8);
+}

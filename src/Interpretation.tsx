@@ -10,14 +10,14 @@ function generateReading(palace: any, isDecadal: boolean = false, contextOverrid
   let reading = '';
 
   if (isDecadal) {
-    reading += `在這十年的大限期間，您的生活重心與運勢主軸將圍繞在「${palace.name}」相關的事務上。\n\n`;
-  }
-
-  // 1. 宮位意義
-  if (contextOverride) {
-    reading += `【${palace.name} - ${contextOverride}】\n\n`;
+    reading += `在這十年的大限期間，您的「大限命宮」走到了本命盤的【${palace.name}】。\n這代表您這十年的總體運勢、環境變化與行事作風，不再侷限於先天的個性，而是會被以下星曜的能量所主導：\n\n`;
   } else {
-    reading += `${PALACE_MEANINGS[palace.name]}\n\n`;
+    // 1. 宮位意義 (Only show for non-decadal)
+    if (contextOverride) {
+      reading += `【${palace.name} - ${contextOverride}】\n\n`;
+    } else {
+      reading += `${PALACE_MEANINGS[palace.name]}\n\n`;
+    }
   }
 
   // 2. 主星意象

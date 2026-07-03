@@ -1,4 +1,4 @@
-import { useState, useRef, useEffect } from 'react';
+import { useState, useRef } from 'react';
 import { X, BookOpen, Clock, Atom, Compass, Activity } from 'lucide-react';
 import './Masterclass.css';
 

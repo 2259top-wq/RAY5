@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { STAR_MEANINGS, PALACE_MEANINGS, MUTAGEN_MEANINGS, BRIGHTNESS_MEANINGS, ADJECTIVE_STAR_MEANINGS } from './data/astrologyText';
+import { STAR_MEANINGS, PALACE_MEANINGS, MUTAGEN_MEANINGS, BRIGHTNESS_MEANINGS, ADJECTIVE_STAR_MEANINGS, ELEMENT_MEANINGS } from './data/astrologyText';
 import { Clock, User, Grid3X3, Sparkles } from 'lucide-react';
 
 // Generates a cohesive paragraph explaining a palace

@@ -131,6 +131,12 @@ body {
   transform: translateY(0);
 }
 
+.results-container {
+  overflow-x: auto;
+  width: 100%;
+  padding-bottom: 1rem;
+}
+
 /* Astrolabe Grid */
 .astrolabe {
   display: grid;
@@ -141,18 +147,20 @@ body {
   padding: 1rem;
   border-radius: 1rem;
   border: 1px solid var(--panel-border);
+  min-width: 850px; /* Forces large chart on mobile */
+  margin: 0 auto;
 }
 
 .palace {
-  background: var(--panel-bg);
+  background: rgba(15, 20, 35, 0.8);
   border: 1px solid var(--panel-border);
   border-radius: 0.5rem;
   padding: 0.5rem;
   display: flex;
   flex-direction: column;
+  min-height: 140px;
   position: relative;
   transition: all 0.3s ease;
-  overflow: hidden;
 }
 
 .palace:hover {
@@ -172,18 +180,20 @@ body {
   justify-content: center;
   align-items: center;
   text-align: center;
-  padding: 2rem;
+  color: var(--text-main);
 }
 
 .center-info h2 {
-  font-size: 1.5rem;
   color: #fbbf24;
+  font-size: 2rem;
   margin-bottom: 1rem;
+  text-shadow: 0 0 10px rgba(251, 191, 36, 0.3);
 }
 
 .center-info p {
   color: var(--text-muted);
-  line-height: 1.6;
+  font-size: 1.1rem;
+  margin: 0.3rem 0;
 }
 
 .palace-header {

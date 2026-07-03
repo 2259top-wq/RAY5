@@ -4,7 +4,6 @@ import { Clock, User, Grid3X3, Sparkles } from 'lucide-react';
 
 // Generates a cohesive paragraph explaining a palace
 function generateReading(palace: any, isDecadal: boolean = false, contextOverride: string = '') {
-  const allStars = [...palace.majorStars, ...palace.minorStars, ...palace.adjectiveStars.slice(0, 4)];
   const majorNames = palace.majorStars.map((s: any) => s.name).join('與');
   const isEmpty = palace.majorStars.length === 0;
 
@@ -123,8 +122,6 @@ export default function Interpretation({ astrolabe }: { astrolabe: any }) {
   const presentPalace = astrolabe.palaces[currentPalaceIndex];
   const pastPalace = astrolabe.palaces[(currentPalaceIndex - 1 + 12) % 12];
   const futurePalace = astrolabe.palaces[(currentPalaceIndex + 1) % 12];
-
-  const destinyPalace = astrolabe.palaces.find((p: any) => p.name === '命宫');
 
   return (
     <section className="interpretation-panel">

@@ -358,9 +358,9 @@ body {
   display: flex;
   align-items: center;
   gap: 0.5rem;
-  background: rgba(255, 255, 255, 0.05);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  color: #cbd5e1;
+  background: rgba(167, 139, 250, 0.15);
+  border: 1px solid rgba(167, 139, 250, 0.4);
+  color: #c4b5fd;
   padding: 0.85rem 1.75rem;
   border-radius: 2rem;
   cursor: pointer;
@@ -374,49 +374,10 @@ body {
 .tab-btn:hover {
   transform: translateY(-2px);
   box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
-}
-
-.tab-btn-timeline {
-  background: rgba(56, 189, 248, 0.15);
-  border-color: rgba(56, 189, 248, 0.4);
-  color: #38bdf8;
-}
-.tab-btn-timeline:hover {
-  background: rgba(56, 189, 248, 0.25);
-}
-.tab-btn-timeline.active {
-  background: linear-gradient(135deg, #0ea5e9, #0284c7);
-  color: white;
-  border-color: transparent;
-  box-shadow: 0 0 20px rgba(14, 165, 233, 0.5);
-  transform: scale(1.05);
-}
-
-.tab-btn-personality {
-  background: rgba(251, 191, 36, 0.15);
-  border-color: rgba(251, 191, 36, 0.4);
-  color: #fbbf24;
-}
-.tab-btn-personality:hover {
-  background: rgba(251, 191, 36, 0.25);
-}
-.tab-btn-personality.active {
-  background: linear-gradient(135deg, #f59e0b, #d97706);
-  color: white;
-  border-color: transparent;
-  box-shadow: 0 0 20px rgba(245, 158, 11, 0.5);
-  transform: scale(1.05);
-}
-
-.tab-btn-palaces {
-  background: rgba(167, 139, 250, 0.15);
-  border-color: rgba(167, 139, 250, 0.4);
-  color: #a78bfa;
-}
-.tab-btn-palaces:hover {
   background: rgba(167, 139, 250, 0.25);
 }
-.tab-btn-palaces.active {
+
+.tab-btn.active {
   background: linear-gradient(135deg, #8b5cf6, #6d28d9);
   color: white;
   border-color: transparent;

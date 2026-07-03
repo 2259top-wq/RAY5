@@ -115,13 +115,17 @@ export default function Interpretation({ astrolabe }: { astrolabe: any }) {
   const currentYear = new Date().getFullYear();
   const currentAge = currentYear - birthYear + 1; // 虛歲
 
-  const currentPalaceIndex = astrolabe.palaces.findIndex((p: any) => 
+  const presentPalace = astrolabe.palaces.find((p: any) => 
     currentAge >= p.decadal.range[0] && currentAge <= p.decadal.range[1]
   );
   
-  const presentPalace = astrolabe.palaces[currentPalaceIndex];
-  const pastPalace = astrolabe.palaces[(currentPalaceIndex - 1 + 12) % 12];
-  const futurePalace = astrolabe.palaces[(currentPalaceIndex + 1) % 12];
+  const pastPalace = presentPalace ? astrolabe.palaces.find((p: any) => 
+    p.decadal.range[1] === (presentPalace.decadal.range[0] - 1)
+  ) : null;
+
+  const futurePalace = presentPalace ? astrolabe.palaces.find((p: any) => 
+    p.decadal.range[0] === (presentPalace.decadal.range[1] + 1)
+  ) : null;
 
   return (
     <section className="interpretation-panel">
